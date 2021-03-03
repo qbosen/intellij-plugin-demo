@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.qbosen.intellijplugindemo</id>
-    <name>intellij-plugin-demo</name>
+    <name>Intellij PluginDemo</name>
     <vendor>qbosen</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -16,4 +16,55 @@
         <listener class="com.github.qbosen.intellijplugindemo.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+    <actions resource-bundle="messages.MyActionBundle">
+        <action id="com.github.qbosen.intellijplugindemo.action.PopupDialogAction"
+                class="com.github.qbosen.intellijplugindemo.action.PopupDialogAction"
+                text="Action Basics Plugin: Pop Dialog Action" description="SDK action example">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <override-text place="MainMenu" text="Pop Dialog Action"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt Q"/>
+        </action>
+        <!-- 没有class属性，使用默认group-->
+        <group id="com.github.qbosen.intellijplugindemo.action.GroupedActions"
+               text="Static Grouped Actions" popup="true"
+               description="SDK statically grouped action example"
+               icon="SdkIcons.Sdk_default_icon">
+            <add-to-group group-id="ToolsMenu" anchor="after"
+                          relative-to-action="com.github.qbosen.intellijplugindemo.action.PopupDialogAction"/>
+            <action id="com.github.qbosen.intellijplugindemo.action.GroupPopupDialogAction"
+                    class="com.github.qbosen.intellijplugindemo.action.PopupDialogAction"
+                    text="A Group Action" description="SDK static group action example"
+                    icon="SdkIcons.Sdk_default_icon">
+            </action>
+        </group>
+
+        <!--
+        custom action group，当editor可用时出现
+        popup :弹出子菜单 or 分割线子菜单
+        使用bundle来配置菜单文字
+        -->
+        <group id="com.github.qbosen.intellijplugindemo.action.CustomDefaultActionGroup"
+               class="com.github.qbosen.intellijplugindemo.action.CustomDefaultActionGroup"
+               popup="true">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <action id="com.github.qbosen.intellijplugindemo.action.CustomGroupAction"
+                    class="com.github.qbosen.intellijplugindemo.action.PopupDialogAction"
+                    icon="SdkIcons.Sdk_default_icon"/>
+        </group>
+
+        <!--
+        动态变化的 action group
+        -->
+        <group id="com.github.qbosen.intellijplugindemo.action.DynamicActionGroup"
+               class="com.github.qbosen.intellijplugindemo.action.DynamicActionGroup"
+               popup="true" text="Dynamically Grouped Actions"
+               description="SDK dynamically grouped action example"
+               icon="SdkIcons.Sdk_default_icon">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="com.github.qbosen.intellijplugindemo.action.GroupedActions"/>
+        </group>
+    </actions>
+
+
 </idea-plugin>
