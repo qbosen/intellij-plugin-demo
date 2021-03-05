@@ -8,12 +8,11 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.qbosen.intellijplugindemo.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.qbosen.intellijplugindemo.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.github.qbosen.intellijplugindemo.services.ProjectCountingService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.qbosen.intellijplugindemo.listeners.MyProjectManagerListener"
+        <listener class="com.github.qbosen.intellijplugindemo.listeners.ProjectOpenCloseListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
