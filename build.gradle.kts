@@ -31,7 +31,10 @@ repositories {
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
 }
-
+// IntelliJInstrumentCodeAction 只在java目录执行。参考：https://github.com/JetBrains/gradle-intellij-plugin/issues/73
+sourceSets.main {
+    java.srcDir("src/main/kotlin")
+}
 // Configure gradle-intellij-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
