@@ -1,7 +1,6 @@
 package com.github.qbosen.intellijplugindemo.toolwindow
 
 import com.intellij.openapi.wm.ToolWindow
-import java.awt.event.ActionEvent
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.swing.JButton
@@ -20,6 +19,10 @@ class MyToolWindow(toolWindow: ToolWindow) {
     lateinit var timeZoneLabel: JLabel
     lateinit var timeLabel: JLabel
 
+    lateinit var interactionField: JPanel
+    lateinit var interactionDialogButton: JButton
+    lateinit var interactionDialogButton2: JButton
+
     private fun currentTime() {
         val now = ZonedDateTime.now()
         calendarLabel.text = now.toLocalDate().format(DateTimeFormatter.ISO_LOCAL_DATE)
@@ -30,5 +33,7 @@ class MyToolWindow(toolWindow: ToolWindow) {
     init {
         hideButton.addActionListener { toolWindow.hide() }
         refreshButton.addActionListener { currentTime() }
+        interactionDialogButton.addActionListener { if (SimpleDialogDSLWrapper().showAndGet()) println("use interact dialog with 'OK'!") }
+        interactionDialogButton2.addActionListener { if (SimpleDialogFormWrapper().showAndGet()) println("use interact dialog with 'OK'!") }
     }
 }
