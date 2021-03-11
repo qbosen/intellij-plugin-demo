@@ -8,7 +8,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.qbosen.intellijplugindemo.services.ProjectCountingService"/>
+        <applicationService
+                serviceImplementation="com.github.qbosen.intellijplugindemo.services.ProjectCountingService"/>
     </extensions>
 
     <applicationListeners>
@@ -61,13 +62,21 @@
                popup="true" text="Dynamically Grouped Actions"
                description="SDK dynamically grouped action example"
                icon="SdkIcons.Sdk_default_icon">
-            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="com.github.qbosen.intellijplugindemo.action.GroupedActions"/>
+            <add-to-group group-id="ToolsMenu" anchor="after"
+                          relative-to-action="com.github.qbosen.intellijplugindemo.action.GroupedActions"/>
         </group>
     </actions>
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Sample Calendar" secondary="true" icon="AllIcons.General.Modified" anchor="right" factoryClass="com.github.qbosen.intellijplugindemo.toolwindow.MyToolWindowFactory"/>
+        <toolWindow id="Sample Calendar" secondary="true" icon="AllIcons.General.Modified" anchor="right"
+                    factoryClass="com.github.qbosen.intellijplugindemo.toolwindow.MyToolWindowFactory"/>
+
+        <applicationConfigurable parentId="tools"
+                                 instance="com.github.qbosen.intellijplugindemo.settings.AppSettingsConfigurable"
+                                 id="com.github.qbosen.intellijplugindemo.settings.AppSettingsConfigurable"
+                                 displayName="SDK: Application Settings Example"/>
+        <applicationService serviceImplementation="com.github.qbosen.intellijplugindemo.settings.AppSettings"/>
     </extensions>
 
 </idea-plugin>

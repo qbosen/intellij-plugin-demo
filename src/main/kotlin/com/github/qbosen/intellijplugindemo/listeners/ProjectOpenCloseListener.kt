@@ -2,7 +2,6 @@ package com.github.qbosen.intellijplugindemo.listeners
 
 import com.github.qbosen.intellijplugindemo.services.ProjectCountingService
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
@@ -16,7 +15,7 @@ class ProjectOpenCloseListener : ProjectManagerListener {
     override fun projectOpened(project: Project) {
         if (ApplicationManager.getApplication().isUnitTestMode) return
 
-        val projectCountingService = project.service<ProjectCountingService>()
+        val projectCountingService = service<ProjectCountingService>()
         projectCountingService.incrProjectCount()
 
         if (projectCountingService.projectLimitExceeded()) {
@@ -30,7 +29,7 @@ class ProjectOpenCloseListener : ProjectManagerListener {
 
     override fun projectClosed(project: Project) {
         if (ApplicationManager.getApplication().isUnitTestMode) return
-        val projectCountingService = project.service<ProjectCountingService>()
+        val projectCountingService = service<ProjectCountingService>()
         projectCountingService.decrProjectCount()
     }
 }
